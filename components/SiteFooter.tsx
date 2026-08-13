@@ -1,0 +1,5 @@
+import Link from 'next/link';
+import { ArrowUpRight, MessageCircle } from 'lucide-react';
+import { whatsappLink } from '@/lib/config';
+
+export function SiteFooter() { return <footer className="site-footer"><div className="shell footer-links"><div><p className="footer-label">Explore</p><Link href="/products">Collections</Link><Link href="/gallery">Gallery</Link><Link href="/about">Our Story</Link><Link href="/contact">Contact</Link></div><div><p className="footer-label">Categories</p><Link href="/products?category=Combs">Horn Combs</Link><Link href="/products?category=Buttons">Horn Buttons</Link><Link href="/products?category=Jewellery">Horn Jewellery</Link><Link href="/products?category=Utensils">Horn Utensils</Link></div><div><p className="footer-label">Contact</p><span>Phone — Available on request</span><span>Email — Available on request</span><span>WhatsApp — Available on request</span></div></div><div className="shell footer-bottom"><span>© 2026 Qadri Exporters</span><span>Natural horn products, shaped with care.</span><span><Link href="/contact">Privacy</Link> <Link href="/contact">Terms</Link></span></div></footer>; }
