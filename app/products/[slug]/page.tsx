@@ -3,9 +3,101 @@ import { ArrowLeft, ArrowRight, MessageCircle } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getProduct, products } from '@/data/products';
+import { getProductBySlug, getProducts } from '@/lib/db/service';
 import { ProductGallery } from '@/components/ProductGallery';
 import { InquiryButton } from '@/components/InquiryButton';
 import { whatsappLink, productInquiryMessage } from '@/lib/config';
-export function generateStaticParams() { return products.map((product) => ({ slug: product.slug })); }
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata { const product = getProduct(params.slug); return { title: product ? `${product.name} | Qadri Exporters` : 'Product | Qadri Exporters', description: product?.shortDescription }; }
-export default function ProductPage({ params }: { params: { slug: string } }) { const product = getProduct(params.slug); if (!product) notFound(); return <main className="page-main product-detail-page"><div className="shell breadcrumb"><Link href="/products"><ArrowLeft size={15} /> Back to collection</Link></div><div className="shell detail-layout"><ProductGallery product={product} /><div className="detail-copy"><p className="eyebrow">{product.category}</p><h1>{product.name}</h1><p className="detail-description">{product.description}</p><div className="detail-actions"><InquiryButton product={product} /><a className="button button-whatsapp" href={whatsappLink(productInquiryMessage(product.name))} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Enquire on WhatsApp</a></div><div className="spec-list">{[['Material', product.material], ['Finish', product.finish], ['Size', product.size], ['Colour', product.color], ['Customization', product.customization], ['MOQ', product.moq]].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value || 'Available on request'}</strong></div>)}</div><p className="detail-note">Specific product information, pricing, quantities and shipping details are shared directly for each inquiry.</p></div></div><div className="shell next-product"><Link href="/products"><span>Continue exploring</span><strong>Return to collection <ArrowRight size={16} /></strong></Link></div></main>; }
+
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const dbProduct = await getProductBySlug(params.slug);
+  const staticProduct = getProduct(params.slug);
+  const product = dbProduct || staticProduct;
+
+  return {
+    title: product ? `${product.name} | Qadri Exporters` : 'Product | Qadri Exporters',
+    description: product ? (product.short_description || product.shortDescription || product.description) : undefined,
+  };
+}
+
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+  const dbProduct = await getProductBySlug(params.slug);
+  const staticProduct = getProduct(params.slug);
+  const rawProduct = dbProduct || staticProduct;
+
+  if (!rawProduct) {
+    notFound();
+  }
+
+  // Normalise product object
+  const product = {
+    ...rawProduct,
+    shortDescription: rawProduct.short_description || rawProduct.shortDescription || '',
+    galleryImages: rawProduct.gallery_images || rawProduct.galleryImages || [],
+  };
+
+  const specs: [string, string | undefined][] = [
+    ['Material', product.material || 'Natural horn'],
+    ['Finish', product.finish || 'Polished'],
+    ['Size', product.size || 'Available on request'],
+    ['Colour', product.color || 'Natural variation'],
+    ['Customization', product.customization || 'Available on request'],
+    ['MOQ', product.moq ? product.moq.replace(/\s*pcs\b/gi, '').trim() : '100'],
+  ];
+
+  return (
+    <main className="page-main product-detail-page">
+      <div className="shell breadcrumb">
+        <Link href="/products">
+          <ArrowLeft size={15} /> Back to collection
+        </Link>
+      </div>
+
+      <div className="shell detail-layout">
+        <ProductGallery product={product} />
+
+        <div className="detail-copy">
+          {product.category && <p className="eyebrow">{product.category}</p>}
+          <h1>{product.name}</h1>
+          <p className="detail-description">{product.description || product.shortDescription}</p>
+
+          <div className="detail-actions">
+            <InquiryButton product={product} />
+            <a
+              className="button button-whatsapp"
+              href={whatsappLink(productInquiryMessage(product.name))}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <MessageCircle size={16} /> Enquire on WhatsApp
+            </a>
+          </div>
+
+          <div className="spec-list">
+            {specs.map(([label, value]) => (
+              <div key={label}>
+                <span>{label}</span>
+                <strong>{value || 'Available on request'}</strong>
+              </div>
+            ))}
+          </div>
+
+          <p className="detail-note">
+            Specific product information, pricing, quantities and shipping details are shared directly for each inquiry.
+          </p>
+        </div>
+      </div>
+
+      <div className="shell next-product">
+        <Link href="/products">
+          <span>Continue exploring</span>
+          <strong>
+            Return to collection <ArrowRight size={16} />
+          </strong>
+        </Link>
+      </div>
+    </main>
+  );
+}
+

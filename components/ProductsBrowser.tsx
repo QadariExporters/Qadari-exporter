@@ -1,21 +1,25 @@
 'use client';
 import { Search, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { Product, categories } from '@/data/products';
+import { Product } from '@/data/products';
 import { ProductCard } from './ProductCard';
 
-export function ProductsBrowser({ products, initialCategory = 'All' }: { products: Product[]; initialCategory?: string }) {
-  const [category, setCategory] = useState(initialCategory);
+export function ProductsBrowser({
+  products,
+}: {
+  products: Product[];
+  categories?: string[];
+  initialCategory?: string;
+}) {
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
   const filtered = useMemo(() => 
     products.filter((product) => 
-      (category === 'All' || product.category === category) && 
-      `${product.name} ${product.category}`.toLowerCase().includes(search.toLowerCase())
+      `${product.name} ${product.category || ''} ${product.description || ''}`.toLowerCase().includes(search.toLowerCase())
     ), 
-    [products, category, search]
+    [products, search]
   );
 
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
@@ -25,18 +29,12 @@ export function ProductsBrowser({ products, initialCategory = 'All' }: { product
     return filtered.slice(startIndex, startIndex + itemsPerPage);
   }, [filtered, currentPage, itemsPerPage]);
 
-  const handleCategoryChange = (cat: string) => {
-    setCategory(cat);
-    setCurrentPage(1);
-  };
-
   const handleSearchChange = (val: string) => {
     setSearch(val);
     setCurrentPage(1);
   };
 
   const handleClear = () => {
-    setCategory('All');
     setSearch('');
     setCurrentPage(1);
   };
@@ -52,13 +50,13 @@ export function ProductsBrowser({ products, initialCategory = 'All' }: { product
 
   return (
     <>
-      <div className="filter-bar">
-        <div className="search-box">
+      <div className="filter-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="search-box" style={{ maxWidth: '320px', width: '100%' }}>
           <Search size={17} />
           <input 
             value={search} 
             onChange={(event) => handleSearchChange(event.target.value)} 
-            placeholder="Search the collection" 
+            placeholder="Search products..." 
             aria-label="Search products" 
           />
           {search && (
@@ -67,18 +65,9 @@ export function ProductsBrowser({ products, initialCategory = 'All' }: { product
             </button>
           )}
         </div>
-        <div className="category-filters">
-          {categories.map((item) => (
-            <button 
-              key={item} 
-              className={category === item ? 'active' : ''} 
-              onClick={() => handleCategoryChange(item)}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-        <button className="clear-filter" onClick={handleClear}>Clear filters</button>
+        {search && (
+          <button className="clear-filter" onClick={handleClear}>Clear search</button>
+        )}
       </div>
 
       <p className="result-count">

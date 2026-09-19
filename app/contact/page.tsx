@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Mail, MessageCircle, Phone } from 'lucide-react';
 import { ContactForm } from '@/components/ContactForm';
-import { whatsappLink } from '@/lib/config';
+import { whatsappLink, PHONE_NUMBER, PHONE_HREF } from '@/lib/config';
 
 export const metadata: Metadata = { title: 'Qadri Exporters | Contact & Product Enquiries', description: 'Start a product, wholesale or custom inquiry with Qadri Exporters.' };
 
@@ -19,15 +19,32 @@ export default function ContactPage() {
         <div className="contact-info">
           <p className="eyebrow">Get in touch</p>
           <h2>Bring us<br /><em>your inquiry.</em></h2>
-          <p>Phone, email and direct WhatsApp details will be added here when provided.</p>
+          <p>For custom manufacturing, export inquiries, or catalog details, contact us directly via phone or WhatsApp.</p>
           <div className="contact-details">
             <div>
               <Phone size={17} />
-              <span>Phone<br /><strong>Available on request</strong></span>
+              <span>
+                Phone
+                <br />
+                <a href={PHONE_HREF} style={{ color: 'inherit', textDecoration: 'none' }}>
+                  <strong>{PHONE_NUMBER}</strong>
+                </a>
+              </span>
             </div>
             <div>
-              <Mail size={17} />
-              <span>Email<br /><strong>Available on request</strong></span>
+              <MessageCircle size={17} />
+              <span>
+                WhatsApp
+                <br />
+                <a 
+                  href={whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.')} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  style={{ color: 'inherit', textDecoration: 'none' }}
+                >
+                  <strong>{PHONE_NUMBER}</strong>
+                </a>
+              </span>
             </div>
           </div>
           <a className="button button-whatsapp" href={whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.')} target="_blank" rel="noreferrer">

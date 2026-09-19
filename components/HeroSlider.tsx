@@ -1,24 +1,151 @@
 'use client';
+
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, ArrowLeft, MessageCircle } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { whatsappLink } from '@/lib/config';
+import { HeroSlide } from '@/lib/db/schema';
+import { defaultHeroSlides } from '@/lib/db/default-data';
 
-const slides = [
-  { eyebrow: 'Viking Heritage', title: <>AUTHENTIC VIKING<br /><em>DRINKING HORNS.</em></>, description: 'Handcrafted buffalo horn tankards for true enthusiasts and themed bars.', image: '/hero-images/drinking-horn-and-tankards.jpg', primary: 'Explore collection', href: '/products' },
-  { eyebrow: 'Serving Bowls', title: <>HANDMADE HORN<br /><em>SERVING BOWLS.</em></>, description: 'Natural buffalo horn bowls with matching cutlery for elegant dining.', image: '/hero-images/horn-bowls.jpg', primary: 'View collection', href: '/products' },
-  { eyebrow: 'Dining Cutlery', title: <>PREMIUM HORN<br /><em>CUTLERY SETS.</em></>, description: 'Handcrafted knives, forks and spoons with natural buffalo horn handles.', image: '/hero-images/horn-cutlery.jpg', primary: 'Discover our story', href: '/about' },
-  { eyebrow: 'Business Inquiry', title: <>Dishes <br /><em>& Trays</em></>, description: 'Authentic Craftsmanship Unique Design', image: '/hero-images/horn-dish-and-trays.jpg', primary: 'Start an inquiry', href: '/contact' },
-  { eyebrow: 'Horn Drinkware', title: <>LUXURY HORN<br /><em>TUMBLERS & GLASSES.</em></>, description: 'Brass-rimmed horn glasses and Viking tumblers for sophisticated drinkware collections.', image: '/hero-images/horn-glasses.jpg', primary: 'View glasses', href: '/products' },
-  { eyebrow: 'Horn Jewellery', title: <>ETHICAL HORN<br /><em>JEWELLERY.</em></>, description: 'Handcrafted earrings, bracelets and necklaces from ethically sourced buffalo horn.', image: '/hero-images/horn-jewellery.jpg', primary: 'Explore jewellery', href: '/products' },
-  { eyebrow: 'Gua Sha Tools', title: <>NATURAL HORN<br /><em>GUA SHA TOOLS.</em></>, description: 'Traditional massage combs and facial tools for wellness and skincare routines.', image: '/hero-images/horn-massage-tools.jpg', primary: 'View tools', href: '/products' },
-  { eyebrow: 'Table Settings', title: <>HORN NAPKIN<br /><em>RINGS.</em></>, description: 'Hand-polished napkin rings adding rustic elegance to any dining table.', image: '/hero-images/horn-napkin-rings.jpg', primary: 'Shop accessories', href: '/products' },
-  { eyebrow: 'Craft Materials', title: <>HORN TURNING<br /><em>ROLLS.</em></>, description: 'Polished horn cylinders for knife handles, pipe making and premium craft applications.', image: '/hero-images/horn-rollers.jpg', primary: 'View rollers', href: '/products' },
-  { eyebrow: 'Precision Scales', title: <>LUXURY HANDMADE<br /><em>Horn Scales.</em></>, description: 'Perfect for Knife & Handle Makers', image: '/hero-images/horn-scales.jpg', primary: 'Explore scales', href: '/products' },
-  { eyebrow: 'Shoe Care', title: <>LUXURY HORN<br /><em>SHOE HORNS.</em></>, description: 'Handcrafted shoehorns protecting footwear while adding sophisticated elegance.', image: '/hero-images/horn-shoehorns.jpg', primary: 'View shoehorns', href: '/products' },
-  { eyebrow: 'Bath Accessories', title: <>HORN SOAP<br /><em>DISHES.</em></>, description: 'Natural horn soap dishes bringing luxury and elegance to bathroom spaces.', image: '/hero-images/horn-soap-dishes.jpg', primary: 'Shop dishes', href: '/products' },
-];
-export function HeroSlider() { const [active, setActive] = useState(0); const [touchStart, setTouchStart] = useState(0); useEffect(() => { const timer = setInterval(() => setActive((current) => (current + 1) % slides.length), 3000); return () => clearInterval(timer); }, []); useEffect(() => { const key = (event: KeyboardEvent) => { if (event.key === 'ArrowRight') setActive((current) => (current + 1) % slides.length); if (event.key === 'ArrowLeft') setActive((current) => (current - 1 + slides.length) % slides.length); }; window.addEventListener('keydown', key); return () => window.removeEventListener('keydown', key); }, []); const slide = slides[active]; return <section className="hero" onTouchStart={(event) => setTouchStart(event.changedTouches[0].screenX)} onTouchEnd={(event) => { const distance = event.changedTouches[0].screenX - touchStart; if (Math.abs(distance) > 45) setActive((current) => distance < 0 ? (current + 1) % slides.length : (current - 1 + slides.length) % slides.length); }}><AnimatePresence mode="wait"><motion.div key={active} className="hero-visual" initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: .9 }}><Image src={slide.image} alt={slide.eyebrow} fill priority sizes="100vw" className="object-cover" /></motion.div></AnimatePresence><div className="hero-overlay" /><div className="shell hero-content"><AnimatePresence mode="wait"><motion.div key={active} initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: .7 }}><p className="eyebrow">{slide.eyebrow}</p><h1>{slide.title}</h1><p className="hero-description">{slide.description}</p><div className="hero-buttons"><Link className="button button-light" href={slide.href}>{slide.primary} <ArrowRight size={16} /></Link><a className="button button-outline-light" href={whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.')} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Enquire on WhatsApp</a></div></motion.div></AnimatePresence></div><div className="shell hero-controls"><div className="hero-nav"><button onClick={() => setActive((active - 1 + slides.length) % slides.length)} aria-label="Previous slide" className="hero-nav-button bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-300"><ArrowLeft size={20} /></button><button onClick={() => setActive((active + 1) % slides.length)} aria-label="Next slide" className="hero-nav-button bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-300"><ArrowRight size={20} /></button></div></div></section>; }
+interface HeroSliderProps {
+  initialSlides?: HeroSlide[];
+}
 
+export function HeroSlider({ initialSlides }: HeroSliderProps) {
+  const slides = (initialSlides && initialSlides.length > 0) ? initialSlides : defaultHeroSlides;
+  const [active, setActive] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    const timer = setInterval(() => {
+      setActive((current) => (current + 1) % slides.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => {
+      if (slides.length <= 1) return;
+      if (event.key === 'ArrowRight') setActive((current) => (current + 1) % slides.length);
+      if (event.key === 'ArrowLeft') setActive((current) => (current - 1 + slides.length) % slides.length);
+    };
+    window.addEventListener('keydown', key);
+    return () => window.removeEventListener('keydown', key);
+  }, [slides.length]);
+
+  if (!slides || slides.length === 0) return null;
+
+  const currentSlide = slides[active] || slides[0];
+
+  const renderTitle = (title: string) => {
+    if (!title) return null;
+    const parts = title.split('\n');
+    if (parts.length > 1) {
+      return (
+        <>
+          {parts[0]}
+          <br />
+          <em>{parts.slice(1).join(' ')}</em>
+        </>
+      );
+    }
+    return title;
+  };
+
+  const button1Text = currentSlide.button_1_text || 'Explore collection';
+  const button1Link = currentSlide.button_1_link || '/products';
+  const button2Text = currentSlide.button_2_text || 'Enquire on WhatsApp';
+  const button2Link = currentSlide.button_2_link || whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.');
+
+  return (
+    <section
+      className="hero"
+      onTouchStart={(event) => setTouchStart(event.changedTouches[0].screenX)}
+      onTouchEnd={(event) => {
+        const distance = event.changedTouches[0].screenX - touchStart;
+        if (Math.abs(distance) > 45 && slides.length > 1) {
+          setActive((current) =>
+            distance < 0 ? (current + 1) % slides.length : (current - 1 + slides.length) % slides.length
+          );
+        }
+      }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={active}
+          className="hero-visual"
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.9 }}
+        >
+          <Image
+            src={currentSlide.image}
+            alt={currentSlide.eyebrow || 'Hero slide'}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="hero-overlay" />
+
+      <div className="shell hero-content">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.7 }}
+          >
+            {currentSlide.eyebrow && <p className="eyebrow">{currentSlide.eyebrow}</p>}
+            <h1>{renderTitle(currentSlide.title)}</h1>
+            {currentSlide.description && (
+              <p className="hero-description">{currentSlide.description}</p>
+            )}
+            <div className="hero-buttons">
+              <Link className="button button-light" href={button1Link}>
+                {button1Text} <ArrowRight size={16} />
+              </Link>
+              <a
+                className="button button-outline-light"
+                href={button2Link}
+                target={button2Link.startsWith('http') ? '_blank' : undefined}
+                rel="noreferrer"
+              >
+                <MessageCircle size={16} /> {button2Text}
+              </a>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {slides.length > 1 && (
+        <div className="shell hero-controls">
+          <div className="hero-nav">
+            <button
+              onClick={() => setActive((active - 1 + slides.length) % slides.length)}
+              aria-label="Previous slide"
+              className="hero-nav-button bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-300"
+            >
+              <ArrowLeft size={20} />
+            </button>
+            <button
+              onClick={() => setActive((active + 1) % slides.length)}
+              aria-label="Next slide"
+              className="hero-nav-button bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-300"
+            >
+              <ArrowRight size={20} />
+            </button>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}

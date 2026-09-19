@@ -1,24 +1,37 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, MessageCircle, X, ChevronDown } from 'lucide-react';
+import { Menu, MessageCircle, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useInquiry } from './InquiryProvider';
 import { InquirySidebar } from './InquirySidebar';
 import { whatsappLink } from '@/lib/config';
-import { categories } from '@/data/products';
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false); 
   const [open, setOpen] = useState(false); 
   const [inquiryOpen, setInquiryOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { items } = useInquiry();
-  useEffect(() => { const handle = () => setScrolled(window.scrollY > 40); window.addEventListener('scroll', handle); return () => window.removeEventListener('scroll', handle); }, []);
-  const links = [['Gallery', '/gallery'], ['Our Story', '/about'], ['Contact', '/contact']];
+
+  useEffect(() => { 
+    const handle = () => setScrolled(window.scrollY > 40); 
+    window.addEventListener('scroll', handle); 
+    return () => window.removeEventListener('scroll', handle); 
+  }, []);
+
+  if (pathname && pathname.startsWith('/admin')) {
+    return null;
+  }
+
+  const links = [
+    ['Products', '/products'],
+    ['Gallery', '/gallery'],
+    ['Our Story', '/about'],
+    ['Contact', '/contact'],
+  ];
   const isDarkTextPage = pathname.startsWith('/products') || ['/gallery', '/about', '/contact'].includes(pathname);
-  
+
   return (
     <>
       <header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${isDarkTextPage ? 'is-dark-text' : ''}`}>
@@ -28,27 +41,11 @@ export function SiteHeader() {
             <span>EXPORTERS</span>
           </Link>
           <nav className="desktop-nav">
-            <div 
-              className="nav-dropdown-wrapper"
-              onMouseEnter={() => setDropdownOpen(true)}
-              onMouseLeave={() => setDropdownOpen(false)}
-            >
-              <Link href="/products" className="nav-dropdown-trigger">
-                Products <ChevronDown size={14} />
+            {links.map(([label, href]) => (
+              <Link key={href} href={href}>
+                {label}
               </Link>
-              <div className={`nav-dropdown ${dropdownOpen ? 'is-open' : ''}`}>
-                {categories.filter(cat => cat !== 'All').map((category) => (
-                  <Link 
-                    key={category} 
-                    href={`/products?category=${encodeURIComponent(category)}`}
-                    onClick={() => setDropdownOpen(false)}
-                  >
-                    {category}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            {links.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
+            ))}
           </nav>
           <div className="nav-actions">
             <button className="inquiry-link" onClick={() => setInquiryOpen(true)}>
@@ -65,8 +62,11 @@ export function SiteHeader() {
         {open && (
           <div className="mobile-menu">
             <nav>
-              <Link href="/products" onClick={() => setOpen(false)}>Products</Link>
-              {links.map(([label, href]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}
+              {links.map(([label, href]) => (
+                <Link key={href} href={href} onClick={() => setOpen(false)}>
+                  {label}
+                </Link>
+              ))}
             </nav>
             <button className="inquiry-link" onClick={() => { setInquiryOpen(true); setOpen(false); }}>
               Inquiry list <span>{items.length}</span>

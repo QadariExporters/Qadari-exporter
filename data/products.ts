@@ -2,9 +2,10 @@ export interface Product {
   id: string;
   slug: string;
   name: string;
-  category: string;
-  shortDescription: string;
-  description: string;
+  category?: string;
+  shortDescription?: string;
+  short_description?: string;
+  description?: string;
   image: string;
   material?: string;
   finish?: string;
@@ -14,12 +15,15 @@ export interface Product {
   moq?: string;
   featured?: boolean;
   galleryImages?: string[];
+  gallery_images?: string[];
+  display_order?: number;
+  is_active?: boolean;
 }
 
 export const products: Product[] = [
-  { id: 'prod-01', slug: 'horn-bowl-01', name: 'Premium Horn Bowl', category: 'Decorative', shortDescription: 'A considered everyday form with the natural character of horn.', description: 'A refined bowl form that lets natural variation, tone and pattern remain part of the object.', image: '/home-our-products/Horn-Bowl.jpg', material: 'Natural horn', finish: 'Polished', size: 'Available on request', color: 'Natural variation', customization: 'Available on request', moq: '100 pcs', featured: true, galleryImages: ['/our-collection/horn-bowl.jpg', '/our-collection/horn-dish-trays.jpg', '/home-our-products/Horn Soap Dish.jpg'] },
+  { id: 'prod-01', slug: 'horn-bowl-01', name: 'Premium Horn Bowl', category: 'Decorative', shortDescription: 'A considered everyday form with the natural character of horn.', description: 'A refined bowl form that lets natural variation, tone and pattern remain part of the object.', image: '/home-our-products/Horn-Bowl.jpg', material: 'Natural horn', finish: 'Polished', size: 'Available on request', color: 'Natural variation', customization: 'Available on request', moq: '100', featured: true, galleryImages: ['/our-collection/horn-bowl.jpg', '/our-collection/horn-dish-trays.jpg', '/home-our-products/Horn Soap Dish.jpg'] },
   { id: 'prod-02', slug: 'buffalo-horn-drinking-02', name: 'Buffalo Horn Drinking Mug', category: 'Cups & Vessels', shortDescription: 'A generous silhouette shaped for a calm, tactile experience.', description: 'A classic viking-style drinking horn mug with a quietly expressive material surface.', image: '/home-our-products/Buffalo Horn Drinking.jpg', material: 'Buffalo horn', finish: 'Polished outside, food-safe inside', size: '15-18 oz', color: 'Dark variation', featured: true, galleryImages: ['/our-collection/drinking-horn.jpg', '/our-collection/horn-glasses.jpg', '/home-our-products/Viking Horn Glass.jpg'] },
-  { id: 'prod-03', slug: 'horn-espresso-spoon-03', name: 'Horn Espresso Spoon', category: 'Utensils', shortDescription: 'Small details with a distinct natural presence.', description: 'Horn spoons selected and finished for product makers looking for a more individual detail.', image: '/home-our-products/Horn Espresso Spoon.jpg', material: 'Natural horn', color: 'Amber variation', customization: 'Available on request', moq: '500 pcs', featured: true, galleryImages: ['/our-collection/buffalo-horn-horn-cutlery.jpg', '/home-our-products/Horn-Bowl.jpg', '/our-collection/drinking-horn.jpg'] },
+  { id: 'prod-03', slug: 'horn-espresso-spoon-03', name: 'Horn Espresso Spoon', category: 'Utensils', shortDescription: 'Small details with a distinct natural presence.', description: 'Horn spoons selected and finished for product makers looking for a more individual detail.', image: '/home-our-products/Horn Espresso Spoon.jpg', material: 'Natural horn', color: 'Amber variation', customization: 'Available on request', moq: '500', featured: true, galleryImages: ['/our-collection/buffalo-horn-horn-cutlery.jpg', '/home-our-products/Horn-Bowl.jpg', '/our-collection/drinking-horn.jpg'] },
   { id: 'prod-04', slug: 'viking-horn-glass-04', name: 'Viking Horn Glass', category: 'Cups & Vessels', shortDescription: 'Functional forms where warmth and texture become part of the ritual.', description: 'A considered drinking glass for buyers seeking natural material and distinctive finish.', image: '/home-our-products/Viking Horn Glass.jpg', material: 'Natural horn', finish: 'Highly polished', featured: true, galleryImages: ['/our-collection/horn-glasses.jpg', '/our-collection/drinking-horn.jpg', '/home-our-products/Buffalo Horn Drinking.jpg'] },
   { id: 'prod-05', slug: 'buffalo-horn-napkin-ring-05', name: 'Buffalo Horn Napkin Ring', category: 'Decorative', shortDescription: 'A sculptural table accessory with an easy, organic line.', description: 'A beautiful napkin ring form shaped to retain the material\'s subtle tonal movement.', image: '/home-our-products/Horn Napkin Ring.jpg', material: 'Natural horn', customization: 'Available on request', featured: true, galleryImages: ['/our-collection/horn-napkin-rings.jpg', '/hero-images/horn-napkin-rings.jpg', '/our-collection/horn-dish-trays.jpg'] },
   { id: 'prod-06', slug: 'textured-horn-soap-dish-06', name: 'Textured Horn Soap Dish', category: 'Decorative', shortDescription: 'A polished utility piece built around the natural arc of horn.', description: 'A tactile soap dish with a quiet visual language and natural variation, perfect for modern bathrooms.', image: '/home-our-products/Horn Soap Dish.jpg', material: 'Natural horn', finish: 'Polished', size: 'Standard', color: 'Natural variation', featured: true, galleryImages: ['/our-collection/horn-soap-dish.jpg', '/our-collection/horn-dish-trays.jpg', '/home-our-products/Horn Napkin Ring.jpg'] },

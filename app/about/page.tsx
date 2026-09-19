@@ -1,4 +1,113 @@
 import type { Metadata } from 'next';
 import { ArrowRight } from 'lucide-react';
-export const metadata: Metadata = { title: 'Qadri Exporters | Our Story', description: 'The material, approach and values behind Qadri Exporters.' };
-export default function AboutPage() { return <main className="page-main"><section className="page-hero page-hero-image-full"><div className="shell"><div className="hero-section-nav"></div><div><p className="eyebrow">The company</p><h1>Our story.</h1><p className="hero-description">Qadri Exporters is a manufacturer and exporter of handcrafted horn products. This is where the material, the approach and the people behind the work will meet.</p></div></div></section><section className="shell about-intro section-pad"><div className="about-intro-layout"><div className="about-image"><img src="/our-collection/horn-bowl.jpg" alt="Our story" /></div><div><p className="eyebrow">01 / Our story</p><h2>A point of view<br /><em>still taking shape</em></h2><p>Qadri Exporters brings together natural horn, considered forms and a direct approach to product inquiries. As the company story develops, this space can hold the details that make the business distinct.</p><p className="muted">Company history and operating details are available on request.</p></div></div></section><section className="about-panels"><div className="shell about-panel-grid"><div><p className="eyebrow">02 / Our material</p><h2>Let natural variation<br /><em>remain visible.</em></h2><p>Horn carries its own tonal range, pattern and texture. We see those variations as part of the design language rather than something to hide.</p></div><div className="about-image"><img src="/our-collection/buffalo-horn-horn-cutlery.jpg" alt="Our material" /></div></div></section><section className="shell values-section section-pad"><p className="eyebrow">03 / Our values</p><div className="values-grid">{[['01', 'QUALITY'], ['02', 'CRAFTSMANSHIP'], ['03', 'INTEGRITY'], ['04', 'CUSTOMER FOCUS']].map(([number, value]) => <div key={value}><span>{number}</span><h3>{value}</h3><ArrowRight size={17} /></div>)}</div></section></main>; }
+import { getAboutPageData } from '@/lib/db/service';
+
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await getAboutPageData();
+  return {
+    title: `${data.hero_title || 'Our Story'} | Qadri Exporters`,
+    description: data.hero_description || 'The material, approach and values behind Qadri Exporters.',
+  };
+}
+
+export default async function AboutPage() {
+  const data = await getAboutPageData();
+
+  return (
+    <main className="page-main">
+      {/* Hero Section */}
+      <section
+        className="page-hero page-hero-image-full"
+        style={{ backgroundImage: `url('${data.hero_image || '/hero-images/drinking-horn-and-tankards.jpg'}')` }}
+      >
+        <div className="shell">
+          <div className="hero-section-nav"></div>
+          <div>
+            <p className="eyebrow" style={{ color: '#dbc7af' }}>
+              {data.hero_eyebrow || 'The company'}
+            </p>
+            <h1 style={{ color: 'var(--white)' }}>
+              {data.hero_title || 'Our story.'}
+            </h1>
+            <p className="hero-description" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>
+              {data.hero_description ||
+                'Qadri Exporters is a manufacturer and exporter of handcrafted horn products. This is where the material, the approach and the people behind the work will meet.'}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 01: Our Story */}
+      <section className="shell about-intro section-pad">
+        <div className="about-intro-layout">
+          <div className="about-image">
+            <img
+              src={data.story_image || '/our-collection/horn-bowl.jpg'}
+              alt={data.story_heading || 'Our story'}
+            />
+          </div>
+          <div>
+            <p className="eyebrow">{data.story_eyebrow || '01 / Our story'}</p>
+            <h2>
+              {data.story_heading || 'A point of view'}
+              {data.story_italic_text && (
+                <>
+                  <br />
+                  <em>{data.story_italic_text}</em>
+                </>
+              )}
+            </h2>
+            <p>{data.story_paragraph_1}</p>
+            {data.story_paragraph_2 && <p>{data.story_paragraph_2}</p>}
+            {data.story_note && <p className="muted">{data.story_note}</p>}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 02: Our Material */}
+      <section className="about-panels">
+        <div className="shell about-panel-grid">
+          <div>
+            <p className="eyebrow">{data.material_eyebrow || '02 / Our material'}</p>
+            <h2>
+              {data.material_heading || 'Let natural variation'}
+              {data.material_italic_text && (
+                <>
+                  <br />
+                  <em>{data.material_italic_text}</em>
+                </>
+              )}
+            </h2>
+            <p>{data.material_description}</p>
+          </div>
+          <div className="about-image">
+            <img
+              src={data.material_image || '/our-collection/buffalo-horn-horn-cutlery.jpg'}
+              alt={data.material_heading || 'Our material'}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Section 03: Our Values */}
+      <section className="shell values-section section-pad">
+        <p className="eyebrow">{data.values_eyebrow || '03 / Our values'}</p>
+        <div className="values-grid">
+          {(data.values_list || []).map((val) => (
+            <div key={val.title}>
+              <span>{val.number}</span>
+              <h3>{val.title}</h3>
+              {val.description && (
+                <p className="text-xs text-stone-500 mt-1">{val.description}</p>
+              )}
+              <ArrowRight size={17} />
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}
+

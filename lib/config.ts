@@ -1,3 +1,5 @@
+export const PHONE_NUMBER = '+91 70883 77976';
+export const PHONE_HREF = 'tel:+917088377976';
 export const WHATSAPP_NUMBER = '917088377976';
 
 export const whatsappLink = (message: string) => {

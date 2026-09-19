@@ -7,13 +7,19 @@ interface ProductGalleryProps {
     name: string;
     image: string;
     galleryImages?: string[];
+    gallery_images?: string[];
   };
 }
 
 export function ProductGallery({ product }: ProductGalleryProps) {
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState(false);
-  const images = [product.image, ...(product.galleryImages || [])];
+  const rawList = [
+    product.image,
+    ...(product.galleryImages || []),
+    ...(product.gallery_images || []),
+  ].filter(Boolean);
+  const images = Array.from(new Set(rawList));
   const next = () => setActive((current) => (current + 1) % images.length);
   const previous = () => setActive((current) => (current - 1 + images.length) % images.length);
 
