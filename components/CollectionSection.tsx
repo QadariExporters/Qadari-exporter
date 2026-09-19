@@ -2,14 +2,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { CollectionItem } from '@/lib/db/schema';
-import { defaultCollections } from '@/lib/db/default-data';
 
 interface CollectionSectionProps {
   items?: CollectionItem[];
 }
 
 export function CollectionSection({ items }: CollectionSectionProps) {
-  const collectionList = (items && items.length > 0) ? items : defaultCollections;
+  const collectionList = (items || []).filter((item) => item.is_active !== false);
+
+  if (collectionList.length === 0) {
+    return null;
+  }
 
   return (
     <section className="collection-section shell section-pad">
@@ -22,7 +25,7 @@ export function CollectionSection({ items }: CollectionSectionProps) {
       </div>
       <div className="collection-cards">
         {collectionList.map((item, index) => (
-          <Link href={item.link || `/products?category=${encodeURIComponent(item.name || item.title)}`} className="collection-card" key={item.id || index}>
+          <Link href={item.link || `/products`} className="collection-card" key={item.id || index}>
             <Image src={item.image} alt={item.title || item.name} fill className="object-cover" />
             <div className="card-content">
               {item.label && <span className="card-label">{item.label}</span>}

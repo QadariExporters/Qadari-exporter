@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 import { Product } from '@/data/products';
-import { InquiryButton } from './InquiryButton';
+import { whatsappLink, productInquiryMessage } from '@/lib/config';
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -11,9 +10,6 @@ export function ProductCard({ product }: { product: Product }) {
           src={product.image} 
           alt={product.name} 
         />
-        <span className="product-arrow">
-          <ArrowUpRight size={18} />
-        </span>
       </Link>
       <div className="product-meta">
         <div>
@@ -22,11 +18,20 @@ export function ProductCard({ product }: { product: Product }) {
             <h3>{product.name}</h3>
           </Link>
         </div>
-        <InquiryButton product={product} compact />
       </div>
-      <Link href={`/products/${product.slug}`} className="product-view">
-        View details <ArrowUpRight size={15} />
-      </Link>
+      <div className="product-card-actions">
+        <Link href={`/products/${product.slug}`} className="product-card-btn product-card-btn-view">
+          View Details
+        </Link>
+        <a
+          href={whatsappLink(productInquiryMessage(product.name))}
+          target="_blank"
+          rel="noreferrer"
+          className="product-card-btn product-card-btn-contact"
+        >
+          Contact Now
+        </a>
+      </div>
     </article>
   );
 }

@@ -1,5 +1,4 @@
 import { ProductCard } from './ProductCard';
-import { products as defaultProductsList } from '@/data/products';
 import { ProductItem } from '@/lib/db/schema';
 
 interface SelectedProductsSectionProps {
@@ -7,8 +6,12 @@ interface SelectedProductsSectionProps {
 }
 
 export function SelectedProductsSection({ products }: SelectedProductsSectionProps) {
-  const allProducts = (products && products.length > 0) ? products : defaultProductsList;
+  const allProducts = products || [];
   const featured = allProducts.filter((p) => p.featured !== false && p.is_active !== false);
+
+  if (featured.length === 0) {
+    return null;
+  }
 
   return (
     <section className="selected-section">

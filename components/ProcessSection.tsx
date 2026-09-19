@@ -1,13 +1,15 @@
-import Image from 'next/image';
 import { ProcessStepItem } from '@/lib/db/schema';
-import { defaultProcessSteps } from '@/lib/db/default-data';
 
 interface ProcessSectionProps {
   steps?: ProcessStepItem[];
 }
 
 export function ProcessSection({ steps }: ProcessSectionProps) {
-  const stepList = (steps && steps.length > 0) ? steps : defaultProcessSteps;
+  const stepList = (steps || []).filter((s) => s.is_active !== false);
+
+  if (stepList.length === 0) {
+    return null;
+  }
 
   return (
     <section className="material-section">

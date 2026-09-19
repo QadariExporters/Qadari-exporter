@@ -126,7 +126,7 @@ export async function getHeroSlides(onlyActive = false): Promise<HeroSlide[]> {
       query = query.eq('is_active', true);
     }
     const { data, error } = await query;
-    if (!error && data && data.length > 0) {
+    if (!error && data) {
       return data as HeroSlide[];
     }
   } catch (err) {
@@ -261,7 +261,7 @@ export async function getCollections(onlyActive = false): Promise<CollectionItem
     let query = supabaseServer.from('collections').select('*').order('display_order', { ascending: true });
     if (onlyActive) query = query.eq('is_active', true);
     const { data, error } = await query;
-    if (!error && data && data.length > 0) {
+    if (!error && data) {
       return data as CollectionItem[];
     }
   } catch (err) {
@@ -341,7 +341,7 @@ export async function getProducts(onlyActive = false): Promise<ProductItem[]> {
     let query = supabaseServer.from('products').select('*').order('display_order', { ascending: true });
     if (onlyActive) query = query.eq('is_active', true);
     const { data, error } = await query;
-    if (!error && data && data.length > 0) {
+    if (!error && data) {
       return data as ProductItem[];
     }
   } catch (err) {
@@ -432,7 +432,7 @@ export async function getProcessSteps(onlyActive = false): Promise<ProcessStepIt
     let query = supabaseServer.from('process_steps').select('*').order('display_order', { ascending: true });
     if (onlyActive) query = query.eq('is_active', true);
     const { data, error } = await query;
-    if (!error && data && data.length > 0) {
+    if (!error && data) {
       return data as ProcessStepItem[];
     }
   } catch (err) {
