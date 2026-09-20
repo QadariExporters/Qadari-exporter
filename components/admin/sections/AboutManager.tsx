@@ -202,9 +202,29 @@ export function AboutManager() {
                 <p className="text-[11px] text-stone-500">Toggle whether this section is visible.</p>
               </div>
               <Switch
-                checked={formData.is_active}
+                checked={formData.is_active ?? true}
                 onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
               />
+            </div>
+
+            <div className="pt-2">
+              <Button
+                type="submit"
+                disabled={isSaving}
+                className="w-full bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold h-10 flex items-center justify-center gap-2 rounded-lg"
+              >
+                {isSaving ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <Save className="w-4 h-4" />
+                    Save About Changes
+                  </>
+                )}
+              </Button>
             </div>
           </form>
         </div>

@@ -34,11 +34,14 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${isDarkTextPage ? 'is-dark-text' : ''}`}>
+      <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="shell nav-inner">
           <Link href="/" className="wordmark" onClick={() => setOpen(false)}>
-            <span>QADRI</span>
-            <span>EXPORTERS</span>
+            <img
+              src="/logo.png"
+              alt="Qadri Horncraft"
+              className="logo-img"
+            />
           </Link>
           <nav className="desktop-nav">
             {links.map(([label, href]) => (

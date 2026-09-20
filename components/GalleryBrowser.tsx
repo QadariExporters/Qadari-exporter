@@ -73,21 +73,21 @@ export function GalleryBrowser({
           <p className="text-sm">No photographs found in this category.</p>
         </div>
       ) : (
-        <div className="masonry-grid">
+        <div className="gallery-grid">
           {shown.map((item, index) => (
             <button 
-              className={`masonry-item masonry-${index % 5} group overflow-hidden relative block w-full text-left`} 
+              className="gallery-item-card group overflow-hidden relative block w-full text-left" 
               key={item.id || `${item.src}-${index}`} 
               onClick={() => setActive(index)}
             >
-              <div className="relative w-full h-full overflow-hidden">
+              <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
                 <img
                   src={item.src}
                   alt={item.label || 'Gallery photograph'}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col justify-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col justify-end p-4 pointer-events-none">
                   <span className="text-[10px] uppercase font-mono tracking-widest text-[#dbc7af] mb-1 font-semibold">
                     {item.category}
                   </span>

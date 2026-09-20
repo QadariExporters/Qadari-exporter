@@ -3,13 +3,13 @@ import { AboutSection } from '@/lib/db/schema';
 import { defaultAboutSection } from '@/lib/db/default-data';
 
 interface IntroSectionProps {
-  data?: AboutSection;
+  data?: AboutSection | null;
 }
 
 export function IntroSection({ data }: IntroSectionProps) {
+  if (data === null || (data && data.is_active === false)) return null;
   const content = data || defaultAboutSection;
-
-  if (data && data.is_active === false) return null;
+  if (content.is_active === false) return null;
 
   const renderHeading = (heading: string) => {
     if (!heading) return null;

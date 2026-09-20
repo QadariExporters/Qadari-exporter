@@ -57,7 +57,7 @@ export function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
   const isHomeActive = pathname.startsWith('/admin/home');
 
   return (
-    <aside className="w-64 bg-zinc-950 text-zinc-300 flex flex-col h-screen border-r border-zinc-800 select-none">
+    <aside className="w-64 bg-zinc-950 text-zinc-300 flex flex-col h-full border-r border-zinc-800 select-none">
       {/* Brand Header */}
       <div className="p-6 border-b border-zinc-800/80 flex items-center justify-between">
         <Link

@@ -3,7 +3,7 @@ import { getAboutSection, updateAboutSection } from '@/lib/db/service';
 
 export async function GET() {
   try {
-    const about = await getAboutSection();
+    const about = await getAboutSection(false);
     return NextResponse.json(about);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch about section' }, { status: 500 });

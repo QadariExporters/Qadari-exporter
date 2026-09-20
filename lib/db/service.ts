@@ -211,15 +211,19 @@ export async function deleteHeroSlide(id: string): Promise<boolean> {
 // ==========================================
 // ABOUT SECTION
 // ==========================================
-export async function getAboutSection(): Promise<AboutSection> {
+export async function getAboutSection(onlyActive = false): Promise<AboutSection> {
   try {
-    const { data, error } = await supabaseServer
+    let query = supabaseServer
       .from('about_sections')
       .select('*')
-      .eq('is_active', true)
       .order('display_order', { ascending: true })
-      .limit(1)
-      .single();
+      .limit(1);
+
+    if (onlyActive) {
+      query = query.eq('is_active', true);
+    }
+
+    const { data, error } = await query.single();
 
     if (!error && data) {
       return data as AboutSection;
@@ -234,7 +238,7 @@ export async function getAboutSection(): Promise<AboutSection> {
 export async function updateAboutSection(updates: Partial<AboutSection>): Promise<AboutSection> {
   const now = new Date().toISOString();
   try {
-    const current = await getAboutSection();
+    const current = await getAboutSection(false);
     const { data, error } = await supabaseServer
       .from('about_sections')
       .upsert({ ...current, ...updates, updated_at: now })

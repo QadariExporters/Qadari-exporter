@@ -10,9 +10,9 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-stone-100/70 overflow-hidden font-sans text-stone-900">
+    <div className="fixed inset-0 flex bg-stone-100/80 overflow-hidden font-sans text-stone-900 z-10">
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block shrink-0">
+      <div className="hidden lg:block shrink-0 h-full">
         <AdminSidebar />
       </div>
 
@@ -24,7 +24,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
       </Sheet>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
         <AdminHeader onToggleMobileMenu={() => setMobileOpen(true)} />
 
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
