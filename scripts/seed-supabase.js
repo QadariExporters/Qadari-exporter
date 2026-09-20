@@ -159,7 +159,7 @@ const heroSlides = [
 ];
 
 const aboutSection = {
-  eyebrow: 'About Qadri Horncraft',
+  eyebrow: 'About Qadri HornCraft',
   heading: 'the character of natural horn',
   subheading: 'Authentic Craftsmanship & Ethically Sourced',
   description: 'Natural horn carries its own variations in tone, texture and pattern. These characteristics give each finished piece a distinctive visual identity.',
@@ -247,7 +247,14 @@ async function seed() {
     const { error } = await supabase.from('about_sections').insert([aboutSection]);
     console.log('About section inserted:', error ? `Error: ${error.message}` : 'OK');
   } else {
-    console.log('About section: Already present in DB');
+    const { error } = await supabase
+      .from('about_sections')
+      .update({ eyebrow: aboutSection.eyebrow })
+      .or('eyebrow.ilike.%exporters%,eyebrow.eq.About Qadri Horncraft');
+    console.log(
+      'About section eyebrow synced:',
+      error ? `Error: ${error.message}` : aboutSection.eyebrow
+    );
   }
 
   // 3. Collections

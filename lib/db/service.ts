@@ -211,6 +211,14 @@ export async function deleteHeroSlide(id: string): Promise<boolean> {
 // ==========================================
 // ABOUT SECTION
 // ==========================================
+function normalizeAboutSection(section: AboutSection): AboutSection {
+  const eyebrow = section.eyebrow?.trim() || '';
+  if (!eyebrow || /exporters/i.test(eyebrow)) {
+    return { ...section, eyebrow: defaultAboutSection.eyebrow };
+  }
+  return section;
+}
+
 export async function getAboutSection(onlyActive = false): Promise<AboutSection> {
   try {
     let query = supabaseServer
@@ -226,13 +234,13 @@ export async function getAboutSection(onlyActive = false): Promise<AboutSection>
     const { data, error } = await query.single();
 
     if (!error && data) {
-      return data as AboutSection;
+      return normalizeAboutSection(data as AboutSection);
     }
   } catch (err) {
     console.warn('Supabase about query error:', err);
   }
 
-  return runtimeStore.about;
+  return normalizeAboutSection(runtimeStore.about);
 }
 
 export async function updateAboutSection(updates: Partial<AboutSection>): Promise<AboutSection> {

@@ -169,7 +169,7 @@ export const defaultHeroSlides: HeroSlide[] = [
 
 export const defaultAboutSection: AboutSection = {
   id: 'about-1',
-  eyebrow: 'About Qadri Horncraft',
+  eyebrow: 'About Qadri HornCraft',
   heading: 'the character of natural horn',
   subheading: 'Authentic Craftsmanship & Ethically Sourced',
   description: 'Natural horn carries its own variations in tone, texture and pattern. These characteristics give each finished piece a distinctive visual identity.',

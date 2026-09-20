@@ -17,7 +17,7 @@ export function AboutManager() {
 
   // Form State
   const [formData, setFormData] = useState<Partial<AboutSection>>({
-    eyebrow: 'About Qadri Horncraft',
+    eyebrow: 'About Qadri HornCraft',
     heading: 'the character of natural horn',
     subheading: 'Authentic Craftsmanship & Ethically Sourced',
     description:
@@ -121,7 +121,7 @@ export function AboutManager() {
               <Input
                 value={formData.eyebrow}
                 onChange={(e) => setFormData({ ...formData, eyebrow: e.target.value })}
-                placeholder="About Qadri Horncraft"
+                placeholder="About Qadri HornCraft"
                 className="bg-stone-50/50 border-stone-300"
               />
             </div>
@@ -239,7 +239,7 @@ export function AboutManager() {
           <div className="bg-[#fcfbf9] border border-stone-200 rounded-xl p-6 shadow-sm">
             <div className="space-y-4">
               <p className="text-[11px] uppercase tracking-[0.2em] text-[#91724d] font-semibold">
-                {formData.eyebrow || 'About Qadri Horncraft'}
+                {formData.eyebrow || 'About Qadri HornCraft'}
               </p>
 
               <h3 className="font-serif text-2xl sm:text-3xl text-stone-900 leading-tight">
