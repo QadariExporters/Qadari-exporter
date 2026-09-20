@@ -1,5 +1,5 @@
 -- ================================================================
--- QADRI EXPORTERS - DATABASE SCHEMA & INITIAL SEED DATA
+-- QADRI HORNCRAFT - DATABASE SCHEMA & INITIAL SEED DATA
 -- Note: Does NOT use Supabase Auth. Uses custom `admins` table.
 -- ================================================================
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS public.hero_sections (
 -- 3. ABOUT SECTIONS TABLE
 CREATE TABLE IF NOT EXISTS public.about_sections (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    eyebrow VARCHAR(255) DEFAULT 'About Qadri Exporters',
+    eyebrow VARCHAR(255) DEFAULT 'About Qadri Horncraft',
     heading TEXT NOT NULL,
     subheading TEXT DEFAULT '',
     description TEXT NOT NULL,

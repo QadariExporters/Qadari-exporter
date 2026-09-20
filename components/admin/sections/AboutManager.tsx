@@ -17,7 +17,7 @@ export function AboutManager() {
 
   // Form State
   const [formData, setFormData] = useState<Partial<AboutSection>>({
-    eyebrow: 'About Qadri Exporters',
+    eyebrow: 'About Qadri Horncraft',
     heading: 'the character of natural horn',
     subheading: 'Authentic Craftsmanship & Ethically Sourced',
     description:
@@ -87,7 +87,7 @@ export function AboutManager() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-stone-200">
         <div>
-          <h3 className="text-lg font-bold text-stone-900">About Qadri Exporters Section CMS</h3>
+          <h3 className="text-lg font-bold text-stone-900">About Qadri Horncraft Section CMS</h3>
           <p className="text-xs text-stone-500 mt-0.5">
             Manage the brand narrative, typography, and right-hand side featured imagery for the About section.
           </p>
@@ -121,7 +121,7 @@ export function AboutManager() {
               <Input
                 value={formData.eyebrow}
                 onChange={(e) => setFormData({ ...formData, eyebrow: e.target.value })}
-                placeholder="About Qadri Exporters"
+                placeholder="About Qadri Horncraft"
                 className="bg-stone-50/50 border-stone-300"
               />
             </div>
@@ -239,7 +239,7 @@ export function AboutManager() {
           <div className="bg-[#fcfbf9] border border-stone-200 rounded-xl p-6 shadow-sm">
             <div className="space-y-4">
               <p className="text-[11px] uppercase tracking-[0.2em] text-[#91724d] font-semibold">
-                {formData.eyebrow || 'About Qadri Exporters'}
+                {formData.eyebrow || 'About Qadri Horncraft'}
               </p>
 
               <h3 className="font-serif text-2xl sm:text-3xl text-stone-900 leading-tight">

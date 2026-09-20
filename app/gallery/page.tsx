@@ -5,8 +5,8 @@ import { getGalleryImages } from '@/lib/db/service';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Qadri Exporters | Product & Craft Gallery',
-  description: 'A closer look at the materials, forms and details in the Qadri Exporters collection.',
+  title: 'Qadri Horncraft | Product & Craft Gallery',
+  description: 'A closer look at the materials, forms and details in the Qadri Horncraft collection.',
 };
 
 export default async function GalleryPage() {

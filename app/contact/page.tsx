@@ -3,7 +3,7 @@ import { Mail, MessageCircle, Phone } from 'lucide-react';
 import { ContactForm } from '@/components/ContactForm';
 import { whatsappLink, PHONE_NUMBER, PHONE_HREF } from '@/lib/config';
 
-export const metadata: Metadata = { title: 'Qadri Exporters | Contact & Product Enquiries', description: 'Start a product, wholesale or custom inquiry with Qadri Exporters.' };
+export const metadata: Metadata = { title: 'Qadri Horncraft | Contact & Product Enquiries', description: 'Start a product, wholesale or custom inquiry with Qadri Horncraft.' };
 
 export default function ContactPage() {
   return (
@@ -12,7 +12,7 @@ export default function ContactPage() {
         <div className="shell">
           <p className="eyebrow" style={{ color: '#dbc7af' }}>Start a conversation</p>
           <h1 style={{ color: 'var(--white)' }}>Let&apos;s create<br /><em style={{ color: '#dbc7af' }}>something together.</em></h1>
-          <p className="hero-description" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>For product information, wholesale requirements or custom specifications, speak directly with the Qadri Exporters team.</p>
+          <p className="hero-description" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>For product information, wholesale requirements or custom specifications, speak directly with the Qadri Horncraft team.</p>
         </div>
       </section>
       <section className="shell contact-layout section-pad">
@@ -37,7 +37,7 @@ export default function ContactPage() {
                 WhatsApp
                 <br />
                 <a 
-                  href={whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.')} 
+                  href={whatsappLink('Hello Qadri Horncraft, I would like to make a product inquiry.')} 
                   target="_blank" 
                   rel="noreferrer"
                   style={{ color: 'inherit', textDecoration: 'none' }}
@@ -47,7 +47,7 @@ export default function ContactPage() {
               </span>
             </div>
           </div>
-          <a className="button button-whatsapp" href={whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.')} target="_blank" rel="noreferrer">
+          <a className="button button-whatsapp" href={whatsappLink('Hello Qadri Horncraft, I would like to make a product inquiry.')} target="_blank" rel="noreferrer">
             <MessageCircle size={16} /> Chat on WhatsApp
           </a>
         </div>

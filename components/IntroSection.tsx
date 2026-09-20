@@ -43,7 +43,7 @@ export function IntroSection({ data }: IntroSectionProps) {
   return (
     <section className="intro-section shell section-pad">
       <div className="intro-heading">
-        <p className="eyebrow">{content.eyebrow || 'About Qadri Exporters'}</p>
+        <p className="eyebrow">{content.eyebrow || 'About Qadri Horncraft'}</p>
         <h2 className="leading-tight" style={{ fontSize: 'clamp(42px, 5.5vw, 80px)' }}>
           {renderHeading(content.heading)}
         </h2>
@@ -54,7 +54,7 @@ export function IntroSection({ data }: IntroSectionProps) {
       <div className="intro-image-wrap">
         <Image
           src={content.image || '/hero-images/about qadri.png'}
-          alt={content.eyebrow || 'About Qadri Exporters'}
+          alt={content.eyebrow || 'About Qadri Horncraft'}
           width={800}
           height={600}
           className="w-full h-auto object-cover rounded-sm shadow-md"

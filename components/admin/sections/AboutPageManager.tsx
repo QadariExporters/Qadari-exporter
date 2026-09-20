@@ -233,7 +233,7 @@ export function AboutPageManager() {
             value={data.story_paragraph_1 || ''}
             onChange={(e) => setData({ ...data, story_paragraph_1: e.target.value })}
             rows={3}
-            placeholder="Qadri Exporters brings together natural horn, considered forms..."
+            placeholder="Qadri Horncraft brings together natural horn, considered forms..."
             className="bg-white border-stone-300"
           />
         </div>

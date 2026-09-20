@@ -54,7 +54,7 @@ export function SiteHeader() {
             <button className="inquiry-link" onClick={() => setInquiryOpen(true)}>
               Inquiry <span>{items.length.toString().padStart(2, '0')}</span>
             </button>
-            <a href={whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.')} className="whatsapp-link" target="_blank" rel="noreferrer">
+            <a href={whatsappLink('Hello Qadri Horncraft, I would like to make a product inquiry.')} className="whatsapp-link" target="_blank" rel="noreferrer">
               <MessageCircle size={16} /> WhatsApp
             </a>
           </div>
@@ -75,7 +75,7 @@ export function SiteHeader() {
               Inquiry list <span>{items.length}</span>
             </button>
             <a 
-              href={whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.')} 
+              href={whatsappLink('Hello Qadri Horncraft, I would like to make a product inquiry.')} 
               target="_blank" 
               rel="noreferrer" 
               className="mobile-menu-whatsapp"

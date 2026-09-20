@@ -7,8 +7,8 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getAboutPageData();
   return {
-    title: `${data.hero_title || 'Our Story'} | Qadri Exporters`,
-    description: data.hero_description || 'The material, approach and values behind Qadri Exporters.',
+    title: `${data.hero_title || 'Our Story'} | Qadri Horncraft`,
+    description: data.hero_description || 'The material, approach and values behind Qadri Horncraft.',
   };
 }
 
@@ -33,7 +33,7 @@ export default async function AboutPage() {
             </h1>
             <p className="hero-description" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>
               {data.hero_description ||
-                'Qadri Exporters is a manufacturer and exporter of handcrafted horn products. This is where the material, the approach and the people behind the work will meet.'}
+                'Qadri Horncraft is a manufacturer and exporter of handcrafted horn products. This is where the material, the approach and the people behind the work will meet.'}
             </p>
           </div>
         </div>

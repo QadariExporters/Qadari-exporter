@@ -35,7 +35,7 @@ export function SiteFooter() {
             Phone: {PHONE_NUMBER}
           </a>
           <a 
-            href={whatsappLink('Hello Qadri Exporters, I would like to make an inquiry.')} 
+            href={whatsappLink('Hello Qadri Horncraft, I would like to make an inquiry.')} 
             target="_blank" 
             rel="noreferrer"
             style={{ color: 'rgba(255, 255, 255, 0.72)', textDecoration: 'none' }}
@@ -46,7 +46,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="shell footer-bottom">
-        <span>© 2026 Qadri Exporters</span>
+        <span>© 2026 Qadri Horncraft</span>
         <span>Natural horn products, shaped with care.</span>
         <span>
           <Link href="/contact">Privacy</Link> <Link href="/contact">Terms</Link>

@@ -34,10 +34,10 @@ export function InquirySidebar({ isOpen, onClose }: { isOpen: boolean; onClose: 
           {!items.length ? (
             <div className="empty-state">
               <p>Your inquiry list is empty.</p>
-              <p className="muted">Add products as you browse, then send one considered message to the Qadri team.</p>
+              <p className="muted">Add products as you browse, then send one considered message to the Qadri Horncraft team.</p>
               <a 
                 className="button button-whatsapp" 
-                href={whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.')} 
+                href={whatsappLink('Hello Qadri Horncraft, I would like to make a product inquiry.')} 
                 target="_blank" 
                 rel="noreferrer"
               >
@@ -71,7 +71,7 @@ export function InquirySidebar({ isOpen, onClose }: { isOpen: boolean; onClose: 
 
         {items.length > 0 && (
           <div className="inquiry-sidebar-footer">
-            <p>Send your selected products directly to the Qadri Exporters team for pricing, quantities and product information.</p>
+            <p>Send your selected products directly to the Qadri Horncraft team for pricing, quantities and product information.</p>
             <a 
               className="button button-whatsapp" 
               href={link} 

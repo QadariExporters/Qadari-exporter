@@ -6,8 +6,8 @@ import { getProducts } from '@/lib/db/service';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Qadri Exporters | Horn Product Collection',
-  description: 'Explore Qadri Exporters natural horn product collection.',
+  title: 'Qadri Horncraft | Horn Product Collection',
+  description: 'Explore Qadri Horncraft natural horn product collection.',
 };
 
 export default async function ProductsPage() {

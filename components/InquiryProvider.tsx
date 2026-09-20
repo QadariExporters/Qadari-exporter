@@ -15,7 +15,7 @@ export function InquiryProvider({ children }: { children: React.ReactNode }) {
   const add = (product: Product) => setItems((current) => current.some((item) => item.product.slug === product.slug) ? current : [...current, { product, quantity: 1 }]);
   const remove = (slug: string) => setItems((current) => current.filter((item) => item.product.slug !== slug));
   const clear = () => setItems([]);
-  const link = useMemo(() => whatsappLink(`Hello Qadri Exporters,\n\nI would like to enquire about:\n\n${items.map((item) => `- ${item.product.name} (quantity: ${item.quantity})`).join('\n')}\n\nPlease share pricing, MOQ, available sizes, customization options and shipping details.\n\nThank you.`), [items]);
+  const link = useMemo(() => whatsappLink(`Hello Qadri Horncraft,\n\nI would like to enquire about:\n\n${items.map((item) => `- ${item.product.name} (quantity: ${item.quantity})`).join('\n')}\n\nPlease share pricing, MOQ, available sizes, customization options and shipping details.\n\nThank you.`), [items]);
   return <InquiryContext.Provider value={{ items, add, remove, clear, link }}>{children}</InquiryContext.Provider>;
 }
 export function useInquiry() { const context = useContext(InquiryContext); if (!context) throw new Error('useInquiry must be used inside InquiryProvider'); return context; }

@@ -11,7 +11,7 @@ export function InquiryBanner() {
         </div>
         <div>
           <p>For wholesale requirements, bulk quantities, custom specifications or product inquiries, speak directly with our team.</p>
-          <a className="button button-dark" href={whatsappLink('Hello Qadri Exporters, I would like to discuss a wholesale or custom product inquiry.')} target="_blank" rel="noreferrer">
+          <a className="button button-dark" href={whatsappLink('Hello Qadri Horncraft, I would like to discuss a wholesale or custom product inquiry.')} target="_blank" rel="noreferrer">
             <MessageCircle size={16} /> Discuss on WhatsApp
           </a>
         </div>

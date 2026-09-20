@@ -169,7 +169,7 @@ export const defaultHeroSlides: HeroSlide[] = [
 
 export const defaultAboutSection: AboutSection = {
   id: 'about-1',
-  eyebrow: 'About Qadri Exporters',
+  eyebrow: 'About Qadri Horncraft',
   heading: 'the character of natural horn',
   subheading: 'Authentic Craftsmanship & Ethically Sourced',
   description: 'Natural horn carries its own variations in tone, texture and pattern. These characteristics give each finished piece a distinctive visual identity.',
@@ -241,13 +241,13 @@ export const defaultAboutPageData: AboutPageData = {
   id: 'about-page-main',
   hero_eyebrow: 'The company',
   hero_title: 'Our story.',
-  hero_description: 'Qadri Exporters is a manufacturer and exporter of handcrafted horn products. This is where the material, the approach and the people behind the work will meet.',
+  hero_description: 'Qadri Horncraft is a manufacturer and exporter of handcrafted horn products. This is where the material, the approach and the people behind the work will meet.',
   hero_image: 'https://ik.imagekit.io/udlbbo3ci/qadri-cms/hero/drinking-horn-and-tankards.jpg',
   // 01 / Our story
   story_eyebrow: '01 / Our story',
   story_heading: 'A point of view',
   story_italic_text: 'still taking shape',
-  story_paragraph_1: 'Qadri Exporters brings together natural horn, considered forms and a direct approach to product inquiries. As the company story develops, this space can hold the details that make the business distinct.',
+  story_paragraph_1: 'Qadri Horncraft brings together natural horn, considered forms and a direct approach to product inquiries. As the company story develops, this space can hold the details that make the business distinct.',
   story_paragraph_2: '',
   story_note: 'Company history and operating details are available on request.',
   story_image: 'https://ik.imagekit.io/udlbbo3ci/qadri-cms/collections/horn-bowl.jpg',

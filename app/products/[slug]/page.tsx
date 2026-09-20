@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const product = dbProduct || staticProduct;
 
   return {
-    title: product ? `${product.name} | Qadri Exporters` : 'Product | Qadri Exporters',
+    title: product ? `${product.name} | Qadri Horncraft` : 'Product | Qadri Horncraft',
     description: product ? (product.short_description || product.shortDescription || product.description) : undefined,
   };
 }

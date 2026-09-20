@@ -159,7 +159,7 @@ const heroSlides = [
 ];
 
 const aboutSection = {
-  eyebrow: 'About Qadri Exporters',
+  eyebrow: 'About Qadri Horncraft',
   heading: 'the character of natural horn',
   subheading: 'Authentic Craftsmanship & Ethically Sourced',
   description: 'Natural horn carries its own variations in tone, texture and pattern. These characteristics give each finished piece a distinctive visual identity.',

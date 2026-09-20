@@ -22,7 +22,7 @@ import { GalleryManager } from '@/components/admin/sections/GalleryManager';
 
 const TAB_OPTIONS = [
   { id: 'hero', label: 'Hero Section', icon: Sparkles, desc: 'Top banners & CTA' },
-  { id: 'about', label: 'About Qadri Exporters', icon: Info, desc: 'Brand story & photo' },
+  { id: 'about', label: 'About Qadri Horncraft', icon: Info, desc: 'Brand story & photo' },
   { id: 'collections', label: 'Our Collection', icon: Layers, desc: 'Category cards' },
   { id: 'products', label: 'Our Products', icon: ShoppingBag, desc: 'Featured pieces' },
   { id: 'process', label: 'The Process', icon: Cpu, desc: 'Craftsmanship steps' },
@@ -96,7 +96,7 @@ function HomePageCMSContent() {
           <HeroManager />
         </TabsContent>
 
-        {/* Tab 2: About Qadri Exporters */}
+        {/* Tab 2: About Qadri Horncraft */}
         <TabsContent value="about" className="mt-0 focus-visible:outline-none focus-visible:ring-0">
           <AboutManager />
         </TabsContent>

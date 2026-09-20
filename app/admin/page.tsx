@@ -106,7 +106,7 @@ export default function AdminDashboardPage() {
             <span>Authenticated CMS Admin Session</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-serif text-white tracking-wide">
-            Welcome to Qadri Exporters Admin Setting
+            Welcome to Qadri Horncraft Admin Setting
           </h2>
           <p className="text-zinc-400 text-sm max-w-xl">
             Manage your public website hero slides, collections, products catalog, process steps, and editorial visual archives in one place.

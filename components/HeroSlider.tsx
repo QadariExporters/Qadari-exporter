@@ -88,7 +88,7 @@ export function HeroSlider({ initialSlides }: HeroSliderProps) {
   const button1Text = currentSlide.button_1_text || 'Explore collection';
   const button1Link = currentSlide.button_1_link || '/products';
   const button2Text = currentSlide.button_2_text || 'Enquire on WhatsApp';
-  const button2Link = currentSlide.button_2_link || whatsappLink('Hello Qadri Exporters, I would like to make a product inquiry.');
+  const button2Link = currentSlide.button_2_link || whatsappLink('Hello Qadri Horncraft, I would like to make a product inquiry.');
 
   return (
     <section

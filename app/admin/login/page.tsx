@@ -61,7 +61,7 @@ function LoginForm() {
           <ShieldCheck className="w-7 h-7 text-[#dbc7af]" />
         </div>
         <h1 className="text-2xl sm:text-3xl font-serif tracking-wider text-white">
-          QADRI EXPORTERS
+          QADRI HORNCRAFT
         </h1>
         <p className="text-xs uppercase tracking-[0.25em] text-[#dbc7af] mt-1 font-medium">
           ADMINISTRATIVE CMS PORTAL

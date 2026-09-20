@@ -47,7 +47,7 @@ export function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
 
   const homeSubSections = [
     { label: 'Hero Section', tab: 'hero', icon: Sparkles },
-    { label: 'About Qadri Exporters', tab: 'about', icon: Info },
+    { label: 'About Qadri Horncraft', tab: 'about', icon: Info },
     { label: 'Our Collection', tab: 'collections', icon: Layers },
     { label: 'Our Products', tab: 'products', icon: ShoppingBag },
     { label: 'The Process', tab: 'process', icon: Cpu },
@@ -66,7 +66,7 @@ export function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
           className="flex flex-col tracking-wider font-serif group"
         >
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-400 group-hover:text-white transition-colors">
-            QADRI EXPORTERS
+            QADRI HORNCRAFT
           </span>
           <span className="text-[10px] tracking-[0.3em] text-[#dbc7af] uppercase">
             Admin CMS

@@ -15,10 +15,10 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://qadriexporters.com'),
-  title: 'Qadri Exporters | Premium Horn Products',
-  description: 'Qadri Exporters offers handcrafted horn products for retail, wholesale and business inquiries.',
+  title: 'Qadri Horncraft | Premium Horn Products',
+  description: 'Qadri Horncraft offers handcrafted horn products for retail, wholesale and business inquiries.',
   openGraph: {
-    title: 'Qadri Exporters | Premium Horn Products',
+    title: 'Qadri Horncraft | Premium Horn Products',
     description: 'Natural horn products shaped through craftsmanship for modern markets.',
   },
 };

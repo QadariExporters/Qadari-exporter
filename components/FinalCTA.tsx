@@ -40,7 +40,7 @@ export function FinalCTA() {
           </Link>
 
           <a
-            href={whatsappLink('Hello Qadri Exporters, I would like to discuss a custom inquiry or wholesale order.')}
+            href={whatsappLink('Hello Qadri Horncraft, I would like to discuss a custom inquiry or wholesale order.')}
             target="_blank"
             rel="noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-stone-900/90 hover:bg-stone-800 text-stone-200 border border-stone-700 font-medium text-sm transition-all duration-300 hover:border-[#dbc7af]/40 hover:text-white"
