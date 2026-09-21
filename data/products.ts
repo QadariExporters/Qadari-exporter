@@ -13,6 +13,7 @@ export interface Product {
   color?: string;
   customization?: string;
   moq?: string;
+  price?: number | string | null;
   featured?: boolean;
   galleryImages?: string[];
   gallery_images?: string[];

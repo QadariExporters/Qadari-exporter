@@ -34,6 +34,7 @@ export function FullCatalogManager() {
     title: '',
     slug: '',
     category: '',
+    price: null,
     short_description: '',
     description: '',
     image: '',
@@ -87,6 +88,7 @@ export function FullCatalogManager() {
       title: '',
       slug: '',
       category: '',
+      price: null,
       short_description: '',
       description: '',
       image: '',
@@ -553,6 +555,26 @@ export function FullCatalogManager() {
                     className="bg-stone-50/50 border-stone-300"
                   />
                 </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-stone-700">
+                  Price (₹ INR / Piece)
+                </label>
+                <Input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="e.g. 45.00 (Optional)"
+                  value={formData.price !== undefined && formData.price !== null ? formData.price : ''}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      price: e.target.value === '' ? null : Number(e.target.value),
+                    })
+                  }
+                  className="bg-stone-50/50 border-stone-300"
+                />
               </div>
 
               <div className="space-y-1">

@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
       color: body.color || '',
       customization: body.customization || '',
       moq: body.moq || '',
+      price: body.price !== undefined && body.price !== null && body.price !== '' ? Number(body.price) : null,
       featured: body.featured !== undefined ? Boolean(body.featured) : true,
       gallery_images: Array.isArray(body.gallery_images) ? body.gallery_images : [],
       display_order: Number(body.display_order) || 0,

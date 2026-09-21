@@ -25,7 +25,6 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [viewMode, setViewMode] = useState<'home' | 'all'>(homeOnly ? 'home' : 'all');
 
   // Dialogs
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -44,6 +43,7 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
     title: '',
     slug: '',
     category: 'Decorative',
+    price: null,
     short_description: '',
     description: '',
     image: '',
@@ -85,6 +85,7 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
       title: '',
       slug: '',
       category: 'Decorative',
+      price: null,
       short_description: '',
       description: '',
       image: '',
@@ -103,7 +104,10 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
 
   const openEditDialog = (item: ProductItem) => {
     setEditingItem(item);
-    setFormData({ ...item });
+    setFormData({
+      ...item,
+      price: item.price !== undefined && item.price !== null ? item.price : null,
+    });
     setIsDialogOpen(true);
   };
 
@@ -237,9 +241,8 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
 
   // Products filtered by view mode
   const featuredProducts = products.filter((p) => p.featured);
-  const displayedBase = viewMode === 'home' ? featuredProducts : products;
 
-  const filtered = displayedBase.filter((p) => {
+  const filtered = featuredProducts.filter((p) => {
     const matchesSearch =
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (p.category && p.category.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -262,76 +265,40 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
         <div>
           <div className="flex items-center gap-2">
             <h3 className="text-lg font-bold text-stone-900">
-              {viewMode === 'home' ? 'Home Page - Our Products Section' : 'Full Product Catalog'}
+              Home Page - Our Products Section
             </h3>
-            {viewMode === 'home' && (
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 border border-amber-300">
-                ★ {featuredProducts.length} on Home Page
-              </span>
-            )}
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 border border-amber-300">
+              ★ {featuredProducts.length} on Home Page
+            </span>
           </div>
           <p className="text-xs text-stone-500 mt-0.5">
-            {viewMode === 'home'
-              ? 'Manage products displayed on the Home Page "Our Products" section. Only items marked as Featured appear here.'
-              : 'Browse and manage all products across your store catalog.'}
+            Manage products displayed on the Home Page "Our Products" section. Only items marked as Featured appear here.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          {viewMode === 'home' ? (
-            <Button
-              onClick={() => setIsCatalogModalOpen(true)}
-              className="bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold h-9 flex items-center gap-1.5"
-            >
-              <Plus className="w-4 h-4 text-[#dbc7af]" />
-              <span>Select Products from Catalog</span>
-            </Button>
-          ) : (
-            <Button
-              onClick={openCreateDialog}
-              className="bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold h-9 flex items-center gap-1.5"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Add New Product</span>
-            </Button>
-          )}
+          <Button
+            onClick={() => setIsCatalogModalOpen(true)}
+            className="bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold h-9 flex items-center gap-1.5"
+          >
+            <Plus className="w-4 h-4 text-[#dbc7af]" />
+            <span>Select Products from Catalog</span>
+          </Button>
         </div>
       </div>
 
-      {/* View Switcher Bar */}
+      {/* View Info Bar */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-stone-100/70 p-1.5 rounded-xl border border-stone-200">
         <div className="flex items-center gap-1 w-full sm:w-auto">
-          <button
-            type="button"
-            onClick={() => setViewMode('home')}
-            className={`flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-              viewMode === 'home'
-                ? 'bg-white text-stone-900 shadow-xs border border-stone-200/80'
-                : 'text-stone-600 hover:text-stone-900'
-            }`}
-          >
-            <Star className={`w-3.5 h-3.5 ${viewMode === 'home' ? 'fill-amber-500 text-amber-500' : ''}`} />
+          <div className="flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-bold bg-white text-stone-900 shadow-xs border border-stone-200/80 flex items-center justify-center gap-1.5">
+            <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
             <span>Home Page Products ({featuredProducts.length})</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setViewMode('all')}
-            className={`flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-              viewMode === 'all'
-                ? 'bg-white text-stone-900 shadow-xs border border-stone-200/80'
-                : 'text-stone-600 hover:text-stone-900'
-            }`}
-          >
-            <span>All Catalog Products ({products.length})</span>
-          </button>
+          </div>
         </div>
 
-        {viewMode === 'home' && (
-          <p className="text-[11px] text-stone-500 px-2 font-medium">
-            💡 The public Home Page displays these {featuredProducts.length} products in order.
-          </p>
-        )}
+        <p className="text-[11px] text-stone-500 px-2 font-medium">
+          💡 The public Home Page displays these {featuredProducts.length} products in order.
+        </p>
       </div>
 
       {/* Filter and Search Bar */}
@@ -340,7 +307,7 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
           <div className="relative flex-1 sm:max-w-xs">
             <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <Input
-              placeholder={viewMode === 'home' ? 'Search Home Page products...' : 'Search all products...'}
+              placeholder="Search Home Page products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-9 bg-stone-50/50 border-stone-300 text-xs h-9"
@@ -363,7 +330,7 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
         </div>
 
         <span className="text-xs text-stone-500 font-medium">
-          Showing {filtered.length} {viewMode === 'home' ? 'home featured' : 'total'} products
+          Showing {filtered.length} home featured products
         </span>
       </div>
 
@@ -381,23 +348,19 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
             </div>
             <div>
               <p className="text-sm font-bold text-stone-800">
-                {viewMode === 'home' ? 'No products featured on Home Page' : 'No products found'}
+                No products featured on Home Page
               </p>
               <p className="text-xs text-stone-500 mt-1 max-w-sm mx-auto">
-                {viewMode === 'home'
-                  ? 'Click "Select from Catalog" to choose existing products to feature on the Home Page.'
-                  : 'Try adjusting your search query or add a new product.'}
+                Click "Select from Catalog" to choose existing products to feature on the Home Page.
               </p>
             </div>
-            {viewMode === 'home' && (
-              <Button
-                onClick={() => setIsCatalogModalOpen(true)}
-                className="bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold"
-              >
-                <Plus className="w-4 h-4 mr-1.5" />
-                Select Products from Catalog
-              </Button>
-            )}
+            <Button
+              onClick={() => setIsCatalogModalOpen(true)}
+              className="bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold"
+            >
+              <Plus className="w-4 h-4 mr-1.5" />
+              Select Products from Catalog
+            </Button>
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -408,6 +371,7 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
                   <th className="py-3 px-4 w-20">Image</th>
                   <th className="py-3 px-4">Product Name</th>
                   <th className="py-3 px-4">Category</th>
+                  <th className="py-3 px-4">Price</th>
                   <th className="py-3 px-4">Home Status</th>
                   <th className="py-3 px-4">Active</th>
                   <th className="py-3 px-4 text-right">Actions</th>
@@ -459,6 +423,15 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
                       </span>
                     </td>
                     <td className="py-3 px-4">
+                      {item.price !== undefined && item.price !== null ? (
+                        <span className="font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded text-xs">
+                          ₹{Number(item.price).toFixed(2)}
+                        </span>
+                      ) : (
+                        <span className="text-[11px] text-stone-400 italic">Inquiry</span>
+                      )}
+                    </td>
+                    <td className="py-3 px-4">
                       <button
                         type="button"
                         onClick={(e) => handleToggleFeatured(item, e)}
@@ -482,17 +455,15 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
                     </td>
                     <td className="py-3 px-4 text-right">
                       <div className="flex items-center justify-end gap-1">
-                        {viewMode === 'home' && (
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            onClick={(e) => handleToggleFeatured(item, e)}
-                            className="h-8 px-2 text-[11px] text-amber-800 hover:text-amber-900 hover:bg-amber-50 border border-amber-200 font-medium"
-                            title="Remove from Home Page"
-                          >
-                            Remove from Home
-                          </Button>
-                        )}
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={(e) => handleToggleFeatured(item, e)}
+                          className="h-8 px-2 text-[11px] text-amber-800 hover:text-amber-900 hover:bg-amber-50 border border-amber-200 font-medium"
+                          title="Remove from Home Page"
+                        >
+                          Remove from Home
+                        </Button>
                         <Button
                           size="sm"
                           variant="ghost"
@@ -562,7 +533,10 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
                     />
                     <div className="min-w-0">
                       <p className="text-xs font-bold text-stone-900 truncate">{p.name}</p>
-                      <p className="text-[11px] text-stone-500 truncate">{p.category} • MOQ: {p.moq || 'N/A'}</p>
+                      <p className="text-[11px] text-stone-500 truncate">
+                        {p.category} • MOQ: {p.moq || 'N/A'}
+                        {p.price !== undefined && p.price !== null ? ` • ₹${Number(p.price).toFixed(2)}` : ''}
+                      </p>
                     </div>
                   </div>
 
@@ -609,7 +583,7 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-4 py-2">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1">
                 <label className="text-xs font-semibold text-stone-700">
                   Product Name <span className="text-rose-500">*</span>
@@ -640,6 +614,26 @@ export function ProductsManager({ homeOnly = true }: ProductsManagerProps) {
                     ))}
                   </SelectContent>
                 </Select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-stone-700">
+                  Price (₹ INR / Piece)
+                </label>
+                <Input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="e.g. 45.00 (Optional)"
+                  value={formData.price !== undefined && formData.price !== null ? formData.price : ''}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      price: e.target.value === '' ? null : Number(e.target.value),
+                    })
+                  }
+                  className="bg-stone-50/50 border-stone-300"
+                />
               </div>
             </div>
 

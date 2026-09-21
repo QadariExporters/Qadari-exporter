@@ -37,7 +37,15 @@ export default async function ProductPage({ params }: { params: { slug: string }
     galleryImages: rawProduct.gallery_images || rawProduct.galleryImages || [],
   };
 
+  const formattedPrice =
+    product.price !== undefined && product.price !== null && product.price !== ''
+      ? typeof product.price === 'number'
+        ? `₹${product.price.toFixed(2)}`
+        : `₹${product.price}`
+      : null;
+
   const specs: [string, string | undefined][] = [
+    ...(formattedPrice ? ([['Price', `${formattedPrice} INR / Piece`]] as [string, string][]) : []),
     ['Material', product.material || 'Natural horn'],
     ['Finish', product.finish || 'Polished'],
     ['Size', product.size || 'Available on request'],
@@ -60,6 +68,12 @@ export default async function ProductPage({ params }: { params: { slug: string }
         <div className="detail-copy">
           {product.category && <p className="eyebrow">{product.category}</p>}
           <h1>{product.name}</h1>
+          {formattedPrice && (
+            <div className="detail-price-badge">
+              <span className="price-amount">{formattedPrice}</span>
+              <span className="price-unit">INR / Piece (FOB)</span>
+            </div>
+          )}
           <p className="detail-description">{product.description || product.shortDescription}</p>
 
           <div className="detail-actions">

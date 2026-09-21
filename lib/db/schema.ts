@@ -70,6 +70,7 @@ export interface ProductItem {
   color?: string;
   customization?: string;
   moq?: string;
+  price?: number | null;
   featured: boolean;
   gallery_images?: string[];
   galleryImages?: string[];

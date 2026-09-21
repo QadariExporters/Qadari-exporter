@@ -49,7 +49,7 @@ export function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
     { label: 'Hero Section', tab: 'hero', icon: Sparkles },
     { label: 'About Qadri Horncraft', tab: 'about', icon: Info },
     { label: 'Our Collection', tab: 'collections', icon: Layers },
-    { label: 'Our Products', tab: 'products', icon: ShoppingBag },
+    { label: 'HomePage Products', tab: 'products', icon: ShoppingBag },
     { label: 'The Process', tab: 'process', icon: Cpu },
     { label: 'Editorial Gallery', tab: 'gallery', icon: ImageIcon },
   ];
@@ -187,7 +187,7 @@ export function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
                   pathname.startsWith('/admin/products-manager') ? 'text-[#dbc7af]' : 'text-zinc-400'
                 }`}
               />
-              <span>Products & Categories</span>
+              <span>Home Page Products</span>
             </Link>
             <button
               type="button"
@@ -217,7 +217,7 @@ export function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
                 }`}
               >
                 <Package className="w-3.5 h-3.5 shrink-0" />
-                <span className="truncate">Products Catalog</span>
+                <span className="truncate">Our Products</span>
               </Link>
               <Link
                 href="/admin/products-manager?tab=categories"

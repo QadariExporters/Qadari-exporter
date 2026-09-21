@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS public.products (
     color VARCHAR(255) DEFAULT '',
     customization VARCHAR(255) DEFAULT '',
     moq VARCHAR(255) DEFAULT '',
+    price NUMERIC(12, 2) DEFAULT NULL,
     featured BOOLEAN NOT NULL DEFAULT true,
     gallery_images TEXT[] DEFAULT '{}',
     display_order INTEGER NOT NULL DEFAULT 0,
